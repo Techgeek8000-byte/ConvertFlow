@@ -1,5 +1,6 @@
 "use client";
 
+import CrossPromo from '@/components/CrossPromo';
 import { useState } from "react";
 import { useStore } from "@/lib/store";
 import Header from "@/components/cf/Header";
@@ -55,7 +56,7 @@ export default function Home() {
           </div>
         )}
       </main>
-
+      <CrossPromo exclude="ConvertFlow" />
       <Footer />
 
       <CheckoutModal
