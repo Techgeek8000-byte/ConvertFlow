@@ -1,0 +1,206 @@
+@import "tailwindcss";
+
+@theme {
+  --color-emerald-50: #ecfdf5;
+  --color-emerald-100: #d1fae5;
+  --color-emerald-200: #a7f3d0;
+  --color-emerald-300: #6ee7b7;
+  --color-emerald-400: #34d399;
+  --color-emerald-500: #10b981;
+  --color-emerald-600: #059669;
+  --color-emerald-700: #047857;
+  --color-emerald-800: #065f46;
+  --color-emerald-900: #064e3b;
+  --color-orange-50: #fff7ed;
+  --color-orange-100: #ffedd5;
+  --color-orange-200: #fed7aa;
+  --color-orange-300: #fdba74;
+  --color-orange-400: #fb923c;
+  --color-orange-500: #f97316;
+  --color-orange-600: #ea580c;
+  --color-teal-400: #2dd4bf;
+  --color-teal-500: #14b8a6;
+  --color-teal-600: #0d9488;
+  --color-slate-50: #f8fafc;
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+  --color-slate-900: #0f172a;
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  --color-violet-500: #8b5cf6;
+  --color-violet-600: #7c3aed;
+  --color-rose-500: #f43f5e;
+  --color-rose-400: #fb7185;
+  --color-rose-600: #e11d48;
+  --color-amber-500: #f59e0b;
+  --color-amber-400: #fbbf24;
+  --color-amber-600: #d97706;
+  --color-cyan-500: #06b6d4;
+  --color-cyan-400: #22d3ee;
+  --color-lime-500: #84cc16;
+  --color-lime-400: #a3e635;
+  --color-purple-500: #a855f7;
+  --color-purple-600: #9333ea;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* ConvertFlow Brand */
+.cf-gradient-text {
+  background: linear-gradient(135deg, #f59e0b, #f97316);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cf-gradient-text-animated {
+  background: linear-gradient(135deg, #f59e0b, #f97316, #fbbf24, #f59e0b);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: cf-gradient-shift 4s ease infinite;
+}
+
+@keyframes cf-gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Pro button gradient */
+.cf-pro-gradient {
+  background: linear-gradient(135deg, #f43f5e, #a855f7);
+}
+
+/* Card styling */
+.cf-card {
+  background: #1a1a2e;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cf-card:hover {
+  border-color: rgba(245, 158, 11, 0.3);
+  box-shadow: 0 0 30px -5px rgba(245, 158, 11, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Tool card specific */
+.cf-tool-card {
+  cursor: pointer;
+}
+
+.cf-tool-card:hover {
+  transform: translateY(-2px) scale(1.01);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Textarea custom */
+.cf-textarea {
+  background: #12121f;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #e2e8f0;
+  border-radius: 10px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.cf-textarea:focus {
+  outline: none;
+  border-color: rgba(245, 158, 11, 0.4);
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+}
+
+.cf-textarea::placeholder {
+  color: rgba(148, 163, 184, 0.5);
+}
+
+/* Input custom */
+.cf-input {
+  background: #12121f;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #e2e8f0;
+  border-radius: 10px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.cf-input:focus {
+  outline: none;
+  border-color: rgba(245, 158, 11, 0.4);
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+}
+
+.cf-input::placeholder {
+  color: rgba(148, 163, 184, 0.5);
+}
+
+/* Progress bar shimmer */
+.cf-progress-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.cf-progress-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  animation: cf-shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes cf-shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Ad banner placeholder */
+.cf-ad-placeholder {
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(255,255,255,0.02),
+    rgba(255,255,255,0.02) 10px,
+    rgba(255,255,255,0.04) 10px,
+    rgba(255,255,255,0.04) 20px
+  );
+  border: 1px dashed rgba(255,255,255,0.08);
+  border-radius: 8px;
+}
+
+body {
+  background-color: #0c0c14;
+  color: #e2e8f0;
+}
