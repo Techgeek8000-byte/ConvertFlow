@@ -3,6 +3,6 @@ import type { MetadataRoute } from 'next';
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: { userAgent: '*', allow: '/', disallow: '/api/' },
-    sitemap: 'https://convertflow.vercel.app/sitemap.xml',
+    sitemap: 'https://convert-flow-beta.vercel.app/sitemap.xml',
   };
 }

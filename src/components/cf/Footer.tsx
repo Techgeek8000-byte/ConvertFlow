@@ -9,6 +9,13 @@ const toolCategoryAnchors = [
   { label: 'Color & Design', anchor: 'tools' },
 ];
 
+const crossLinks = [
+  { label: 'ToolPDF', href: 'https://tool-pdf-six.vercel.app' },
+  { label: 'CalcHub', href: 'https://calc-hub-ashy.vercel.app' },
+  { label: 'SEOKit', href: 'https://seo-kit-tau.vercel.app' },
+  { label: 'PixelForge AI', href: 'https://pixelforge-ai-chi.vercel.app' },
+];
+
 export default function Footer() {
   return (
     <footer className="mt-auto border-t border-white/[0.06] bg-[#0a0a12]">
@@ -57,28 +64,19 @@ export default function Footer() {
               More Tools
             </h4>
             <ul className="space-y-2">
-              <li>
-                <a
-                  href="https://tool-pdf-six.vercel.app"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-300 transition-colors"
-                >
-                  ToolPDF
-                  <ExternalLink className="w-3 h-3" />
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://calchub.vercel.app"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-300 transition-colors"
-                >
-                  CalcHub
-                  <ExternalLink className="w-3 h-3" />
-                </a>
-              </li>
+              {crossLinks.map(link => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-300 transition-colors"
+                  >
+                    {link.label}
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -111,7 +109,7 @@ export default function Footer() {
         {/* Copyright */}
         <div className="py-6 border-t border-white/[0.04] text-center">
           <p className="text-xs text-slate-600">
-            © 2025 ConvertFlow. All rights reserved.
+            © 2025 ConvertFlow — A Project by Osama. All rights reserved.
           </p>
         </div>
       </div>

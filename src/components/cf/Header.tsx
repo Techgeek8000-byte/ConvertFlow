@@ -8,6 +8,13 @@ interface HeaderProps {
   onGoPro?: () => void;
 }
 
+const crossLinks = [
+  { label: 'ToolPDF', href: 'https://tool-pdf-six.vercel.app' },
+  { label: 'CalcHub', href: 'https://calc-hub-ashy.vercel.app' },
+  { label: 'SEOKit', href: 'https://seo-kit-tau.vercel.app' },
+  { label: 'PixelForge AI', href: 'https://pixelforge-ai-chi.vercel.app' },
+];
+
 export default function Header({ onGoPro }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -18,9 +25,14 @@ export default function Header({ onGoPro }: HeaderProps) {
           {/* Logo */}
           <a href="/" className="flex items-center gap-2 group">
             <span className="text-2xl">⚡</span>
-            <span className="text-xl font-bold cf-gradient-text-animated">
-              ConvertFlow
-            </span>
+            <div className="flex flex-col">
+              <span className="text-xl font-bold cf-gradient-text-animated">
+                ConvertFlow
+              </span>
+              <span className="text-[10px] font-semibold tracking-wider text-slate-500 uppercase leading-none">
+                A Project by Osama
+              </span>
+            </div>
           </a>
 
           {/* Desktop nav */}
@@ -32,25 +44,19 @@ export default function Header({ onGoPro }: HeaderProps) {
               Home
             </a>
 
-            <div className="flex items-center gap-4 ml-2 pl-4 border-l border-white/[0.06]">
-              <a
-                href="https://tool-pdf-six.vercel.app"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-slate-200 transition-colors"
-              >
-                ToolPDF
-                <ExternalLink className="w-3 h-3" />
-              </a>
-              <a
-                href="https://calchub.vercel.app"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-slate-200 transition-colors"
-              >
-                CalcHub
-                <ExternalLink className="w-3 h-3" />
-              </a>
+            <div className="flex items-center gap-3 ml-2 pl-4 border-l border-white/[0.06]">
+              {crossLinks.map(link => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-slate-200 transition-colors"
+                >
+                  {link.label}
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              ))}
             </div>
 
             <button
@@ -92,24 +98,18 @@ export default function Header({ onGoPro }: HeaderProps) {
               </a>
 
               <div className="border-t border-white/[0.06] pt-3 space-y-3">
-                <a
-                  href="https://tool-pdf-six.vercel.app"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm text-slate-400 hover:text-slate-200 transition-colors py-1"
-                >
-                  ToolPDF
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-                <a
-                  href="https://calchub.vercel.app"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm text-slate-400 hover:text-slate-200 transition-colors py-1"
-                >
-                  CalcHub
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
+                {crossLinks.map(link => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-sm text-slate-400 hover:text-slate-200 transition-colors py-1"
+                  >
+                    {link.label}
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                ))}
               </div>
 
               <div className="border-t border-white/[0.06] pt-3">

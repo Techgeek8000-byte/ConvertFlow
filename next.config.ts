@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: true,
   },
   reactStrictMode: false,
-  turbopack: {},
+  turbopack: { root: process.cwd() },
 };
 
 export default nextConfig;

@@ -3,12 +3,13 @@
 import { ExternalLink } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const promoItems = [
+interface Props { exclude?: string; }
+
+const allTools = [
   {
     name: 'ToolPDF',
     emoji: '📄',
-    description:
-      'Merge, split, compress, convert, rotate, watermark, and protect PDFs — all in your browser.',
+    description: 'Merge, split, compress, convert, rotate, watermark, and protect PDFs — all in your browser.',
     url: 'https://tool-pdf-six.vercel.app',
     gradient: 'from-rose-500/20 via-[#1a1a2e] to-[#1a1a2e]',
     borderGradient: 'border-rose-500/20',
@@ -17,16 +18,34 @@ const promoItems = [
   {
     name: 'CalcHub',
     emoji: '🧮',
-    description:
-      '20+ free calculators for finance, health, math, and everyday use. 100% private.',
-    url: 'https://calchub.vercel.app',
+    description: '20+ free calculators for finance, health, math, and everyday use. 100% private.',
+    url: 'https://calc-hub-ashy.vercel.app',
     gradient: 'from-emerald-500/20 via-[#1a1a2e] to-[#1a1a2e]',
     borderGradient: 'border-emerald-500/20',
     hoverBorder: 'hover:border-emerald-500/40',
   },
+  {
+    name: 'SEOKit',
+    emoji: '🔍',
+    description: 'Free SEO tools — meta tags, SERP preview, keyword density, and more.',
+    url: 'https://seo-kit-tau.vercel.app',
+    gradient: 'from-purple-500/20 via-[#1a1a2e] to-[#1a1a2e]',
+    borderGradient: 'border-purple-500/20',
+    hoverBorder: 'hover:border-purple-500/40',
+  },
+  {
+    name: 'PixelForge AI',
+    emoji: '🎨',
+    description: 'Free AI image generator — avatars, logos, art, and more.',
+    url: 'https://pixelforge-ai-chi.vercel.app',
+    gradient: 'from-pink-500/20 via-[#1a1a2e] to-[#1a1a2e]',
+    borderGradient: 'border-pink-500/20',
+    hoverBorder: 'hover:border-pink-500/40',
+  },
 ];
 
-export default function CrossPromo() {
+export default function CrossPromo({ exclude }: Props) {
+  const tools = exclude ? allTools.filter(t => t.name !== exclude) : allTools;
   return (
     <section className="py-16">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -46,7 +65,7 @@ export default function CrossPromo() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {promoItems.map((item, i) => (
+          {tools.map((item, i) => (
             <motion.a
               key={item.name}
               href={item.url}
