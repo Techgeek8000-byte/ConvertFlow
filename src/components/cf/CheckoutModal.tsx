@@ -1,6 +1,6 @@
 'use client';
 
-import { X, Crown, Check, Sparkles, Zap, Clock, Infinity } from 'lucide-react';
+import { X, Crown, Check, Zap, Clock, Infinity } from 'lucide-react';
 import { LEMON_SQUEEZY } from '@/lib/lemonsqueezy';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -26,7 +26,7 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
     <AnimatePresence>
       {isOpen && (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm" onClick={onClose}>
-          <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 0 }} exit={{ scale: 0.9, opacity: 0 }} onClick={(e) => e.stopPropagation()} className="w-full max-w-lg rounded-2xl bg-[#141422] border border-white/[0.08] p-8 relative max-h-[90vh] overflow-y-auto">
+          <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} onClick={(e) => e.stopPropagation()} className="w-full max-w-lg rounded-2xl bg-[#141422] border border-white/[0.08] p-8 relative max-h-[90vh] overflow-y-auto">
             <button onClick={onClose} className="absolute top-4 right-4 p-1.5 rounded-lg text-slate-500 hover:text-white hover:bg-white/[0.05]"><X className="w-5 h-5" /></button>
             <div className="text-center mb-8"><div className="w-14 h-14 mx-auto mb-4 rounded-full bg-gradient-to-br from-rose-500/20 to-purple-500/20 flex items-center justify-center"><Crown className="w-7 h-7 text-rose-400" /></div><h3 className="text-2xl font-extrabold text-white mb-1">Upgrade to Pro</h3><p className="text-sm text-slate-400">Get unlimited power for your conversions</p></div>
             <div className="space-y-3 mb-6">
