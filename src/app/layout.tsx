@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Toaster } from "sonner";
+import { ThemeProvider } from "@/components/cf/ThemeProvider";
 import "./globals.css";
 
 const inter = Inter({
@@ -48,7 +50,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="dark">
       <head>
         <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -75,8 +77,21 @@ export default function RootLayout({
           }}
         ></script>
       </head>
-      <body className={`${inter.variable} font-sans antialiased`}>
-        {children}
+      <body className={`${inter.variable} font-sans antialiased bg-white dark:bg-[#0c0c14] text-gray-900 dark:text-slate-200`}>
+        <ThemeProvider>
+          {children}
+          <Toaster
+            position="bottom-right"
+            toastOptions={{
+              style: {
+                background: '#1a1a2e',
+                border: '1px solid rgba(255,255,255,0.08)',
+                color: '#e2e8f0',
+                fontSize: '14px',
+              },
+            }}
+          />
+        </ThemeProvider>
       </body>
     </html>
   );

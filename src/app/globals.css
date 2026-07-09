@@ -58,6 +58,34 @@
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
+/* ──────────── Light Theme Variables ──────────── */
+
+.light {
+  --cf-bg: #ffffff;
+  --cf-bg-secondary: #f8fafc;
+  --cf-surface: #ffffff;
+  --cf-surface-hover: #f1f5f9;
+  --cf-border: rgba(0, 0, 0, 0.08);
+  --cf-border-hover: rgba(0, 0, 0, 0.14);
+  --cf-text: #0f172a;
+  --cf-text-secondary: #475569;
+  --cf-text-muted: #94a3b8;
+  --cf-glow: rgba(245, 158, 11, 0.3);
+}
+
+.dark {
+  --cf-bg: #0c0c14;
+  --cf-bg-secondary: #141422;
+  --cf-surface: #1a1a2e;
+  --cf-surface-hover: rgba(255, 255, 255, 0.05);
+  --cf-border: rgba(255, 255, 255, 0.08);
+  --cf-border-hover: rgba(255, 255, 255, 0.14);
+  --cf-text: #e2e8f0;
+  --cf-text-secondary: #94a3b8;
+  --cf-text-muted: #64748b;
+  --cf-glow: rgba(245, 158, 11, 0.15);
+}
+
 /* ConvertFlow Brand */
 .cf-gradient-text {
   background: linear-gradient(135deg, #f59e0b, #f97316);
@@ -203,4 +231,9 @@
 body {
   background-color: #0c0c14;
   color: #e2e8f0;
+}
+
+.light body {
+  background-color: #ffffff;
+  color: #0f172a;
 }

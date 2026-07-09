@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useMemo, useEffect } from 'react';
+import { useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import {
   ArrowLeft,
   Copy,
@@ -12,12 +12,15 @@ import {
   RefreshCw,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { toast } from 'sonner';
 import { tools, categoryLabels } from '@/lib/tool-definitions';
 import { useStore } from '@/lib/store';
 import { runConversion } from '@/lib/converters';
+import { incrementUsage, recordRecentTool } from '@/lib/usage-counter';
 import ProgressBar from './ProgressBar';
 import FileUploader from './FileUploader';
 import AdBanner from './AdBanner';
+import SocialShare from './SocialShare';
 
 /* ──────────── sub-components ──────────── */
 
@@ -27,6 +30,7 @@ function CopyButton({ text }: { text: string }) {
     if (!text) return;
     navigator.clipboard.writeText(text).then(() => {
       setCopied(true);
+      toast.success('Copied to clipboard!');
       setTimeout(() => setCopied(false), 2000);
     });
   }, [text]);
@@ -583,6 +587,38 @@ function PremiumUpsell() {
   );
 }
 
+/* ──────────── loading skeletons ──────────── */
+
+function TextOutputSkeleton() {
+  return (
+    <div className="space-y-3 animate-pulse">
+      <div className="h-3 bg-white/[0.06] rounded w-1/4" />
+      <div className="cf-textarea p-4 space-y-2 min-h-[300px]">
+        <div className="h-3 bg-white/[0.06] rounded w-3/4" />
+        <div className="h-3 bg-white/[0.06] rounded w-1/2" />
+        <div className="h-3 bg-white/[0.06] rounded w-5/6" />
+        <div className="h-3 bg-white/[0.06] rounded w-2/3" />
+        <div className="h-3 bg-white/[0.06] rounded w-1/2" />
+        <div className="h-3 bg-white/[0.06] rounded w-4/5" />
+        <div className="h-3 bg-white/[0.06] rounded w-1/3" />
+      </div>
+    </div>
+  );
+}
+
+function FileOutputSkeleton() {
+  return (
+    <div className="space-y-4 animate-pulse">
+      <div className="h-32 bg-white/[0.06] rounded-xl flex items-center justify-center">
+        <div className="flex flex-col items-center gap-2">
+          <RefreshCw className="w-6 h-6 text-slate-600 animate-spin" />
+          <div className="h-3 bg-white/[0.06] rounded w-24" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ──────────── main component ──────────── */
 
 export default function ToolWorkspace() {
@@ -608,6 +644,34 @@ export default function ToolWorkspace() {
 
   const [showLimitModal, setShowLimitModal] = useState(false);
   const [pendingConvert, setPendingConvert] = useState<(() => void) | null>(null);
+
+  // Track last output to detect conversion completion
+  const prevOutputRef = useRef<string>('');
+
+  useEffect(() => {
+    // When outputText changes from empty to non-empty and we were processing, conversion completed
+    if (outputText && !isProcessing && outputText !== prevOutputRef.current && activeTool) {
+      incrementUsage(activeTool);
+      recordRecentTool(activeTool);
+      toast.success('Conversion complete!', {
+        description: `Your ${tool?.name || 'conversion'} is ready.`,
+      });
+    }
+    prevOutputRef.current = outputText;
+  }, [outputText, isProcessing, activeTool, tool?.name]);
+
+  // Also detect blob completion
+  const prevBlobRef = useRef<Blob | null>(null);
+  useEffect(() => {
+    if (processedBlob && !isProcessing && processedBlob !== prevBlobRef.current && activeTool) {
+      incrementUsage(activeTool);
+      recordRecentTool(activeTool);
+      toast.success('Conversion complete!', {
+        description: `Your ${tool?.name || 'file'} is ready.`,
+      });
+    }
+    prevBlobRef.current = processedBlob;
+  }, [processedBlob, isProcessing, activeTool, tool?.name]);
 
   const tool = useMemo(() => tools.find((t) => t.id === activeTool), [activeTool]);
 
@@ -689,11 +753,15 @@ export default function ToolWorkspace() {
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <label className="text-xs font-medium text-slate-400">Output</label>
-          <CopyButton text={outputText} />
+          {!isProcessing && outputText && <CopyButton text={outputText} />}
         </div>
-        <div className="cf-textarea p-4 text-sm min-h-[300px] text-slate-200 overflow-auto max-h-96">
-          {outputText || <span className="text-slate-600">Result will appear here…</span>}
-        </div>
+        {isProcessing ? (
+          <TextOutputSkeleton />
+        ) : (
+          <div className="cf-textarea p-4 text-sm min-h-[300px] text-slate-200 overflow-auto max-h-96">
+            {outputText || <span className="text-slate-600">Result will appear here…</span>}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -895,6 +963,16 @@ export default function ToolWorkspace() {
         {!isPremium && (outputText || processedBlob) && (
           <div className="pt-2">
             <PremiumUpsell />
+          </div>
+        )}
+
+        {/* Social share */}
+        {(outputText || processedBlob) && (
+          <div className="pt-2">
+            <SocialShare
+              url={typeof window !== 'undefined' ? window.location.href : ''}
+              title={`I just used ${tool.name} on ConvertFlow — check it out!`}
+            />
           </div>
         )}
 

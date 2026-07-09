@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
-import { Search, Shield, Zap, WifiOff, Gift, Lock } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Search, Shield, Zap, WifiOff, Gift, Lock, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { getTotalUsage, getUsageCounts } from '@/lib/usage-counter';
 
 interface HeroSectionProps {
   searchQuery: string;
@@ -23,6 +24,11 @@ const stats = [
 
 export default function HeroSection({ searchQuery, onSearchChange }: HeroSectionProps) {
   const [isFocused, setIsFocused] = useState(false);
+  const [totalUsage, setTotalUsage] = useState(0);
+
+  useEffect(() => {
+    setTotalUsage(getTotalUsage());
+  }, []);
 
   return (
     <section className="relative overflow-hidden">
@@ -133,6 +139,15 @@ export default function HeroSection({ searchQuery, onSearchChange }: HeroSection
               </div>
             </div>
           ))}
+          {totalUsage > 0 && (
+            <div className="flex items-center gap-2.5">
+              <Sparkles className="w-4 h-4 text-purple-400" />
+              <div className="text-left">
+                <div className="text-sm font-bold text-white">{totalUsage}</div>
+                <div className="text-xs text-slate-500">Conversions</div>
+              </div>
+            </div>
+          )}
         </motion.div>
       </div>
     </section>
