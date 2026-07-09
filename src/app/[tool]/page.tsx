@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { converterMetaMap } from '@/lib/converter-meta';
+import { toolContent } from '@/lib/tool-content';
 import ToolPageClient from './_client';
 
 interface Props { params: Promise<{ tool: string }>; }
@@ -14,5 +15,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ToolPage({ params }: Props) {
   const { tool } = await params;
   const meta = converterMetaMap[tool];
-  return <ToolPageClient toolSlug={tool} toolMeta={meta} />;
+  const content = toolContent[tool] || {};
+  return <ToolPageClient toolSlug={tool} toolMeta={meta ? { ...meta, ...content } : undefined} />;
 }
