@@ -645,8 +645,6 @@ export default function ToolWorkspace() {
   const [showLimitModal, setShowLimitModal] = useState(false);
   const [pendingConvert, setPendingConvert] = useState<(() => void) | null>(null);
 
-  const tool = useMemo(() => tools.find((t) => t.id === activeTool), [activeTool]);
-
   // Track last output to detect conversion completion
   const prevOutputRef = useRef<string>('');
 
@@ -674,6 +672,8 @@ export default function ToolWorkspace() {
     }
     prevBlobRef.current = processedBlob;
   }, [processedBlob, isProcessing, activeTool, tool?.name]);
+
+  const tool = useMemo(() => tools.find((t) => t.id === activeTool), [activeTool]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
